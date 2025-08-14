@@ -44,10 +44,10 @@ export class AuthService {
     });
 
     await newUser.save();
-
-    return {
+    const registeredUserResponse: RegisterResponseDto = {
       message: 'Registration successful',
     };
+    return registeredUserResponse;
   }
 
   async login(loginRequestDto: LoginRequestDto): Promise<LoginResponseDto> {
@@ -72,16 +72,20 @@ export class AuthService {
       expiresIn: this.configService.get<string>('JWT_EXPIRATION'),
     });
 
-    return {
+    const loginUserResponse: LoginResponseDto = {
       accessToken,
       message: 'Login successfully',
     };
+    return loginUserResponse;
   }
   async logout(userId: string): Promise<LogoutResponseDto> {
     await this.userModel.updateOne(
       { _id: userId },
       { $inc: { tokenVersion: 1 } },
     );
-    return { message: 'Logout successful' };
+    const logoutUserResponse: LogoutResponseDto = {
+      message: 'Logout successful',
+    };
+    return logoutUserResponse;
   }
 }
