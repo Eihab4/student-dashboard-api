@@ -9,10 +9,10 @@ export class User extends Document {
   email: string;
 
   @Prop({ required: true })
-  password: string;
+  name: string;
 
   @Prop({ required: true })
-  name: string;
+  password: string;
 
   @Prop({ required: true })
   tokenVersion: number;
