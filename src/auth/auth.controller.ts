@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginRequestDto } from './dto/requests/login.request.dto';
 import { RegisterRequestDto } from './dto/requests/register.request.dto';
@@ -29,5 +29,13 @@ export class AuthController {
   @Post('logout')
   logout(@CurrentUser() user: JwtPayload): Promise<LogoutResponseDto> {
     return this.authService.logout(user.id);
+  }
+  @Get('verify')
+  @UseGuards(AuthGuard)
+  verifyToken(@CurrentUser() user: JwtPayload): {
+    valid: boolean;
+    user: JwtPayload;
+  } {
+    return { valid: true, user };
   }
 }
