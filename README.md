@@ -38,7 +38,7 @@ The application uses Mongoose schemas to define data models:
 - **Quiz**: Contains quiz content, questions, answers, and scoring information
 - **Announcement**: Manages notifications and important updates for students
 
-## Why This Architecture Is Awesome
+## Why This Architecture Is Robust?
 
 ### Modular Design
 
