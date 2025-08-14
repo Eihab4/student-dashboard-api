@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   BadRequestException,
   Injectable,
@@ -35,7 +33,7 @@ export class AuthService {
     }
     const hashedPassword: string = await bcrypt.hash(
       password,
-      this.configService.get<number>('BCRYPT_SALT_ROUNDS', 10),
+      parseInt(this.configService.get<string>('BCRYPT_SALT_ROUNDS', '10')),
     );
 
     const newUser = new this.userModel({
@@ -60,10 +58,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const isPasswordValid = (await bcrypt.compare(
-      password,
-      user.password,
-    )) as boolean;
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid email or password');
     }
