@@ -1,37 +1,150 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Student Dashboard API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+The Student Dashboard API is a robust backend service built with NestJS to support a student learning platform. This API provides essential functionality for student dashboards, including user authentication, quiz management, and announcements. The project is designed with modularity, scalability, and maintainability in mind, following best practices for modern web application development.
 
-## Description
+## Project Structure
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The project follows a modular architecture that leverages NestJS's powerful module system:
 
-## Project setup
+```
+├── src/
+│   ├── announcements/       # Handles student announcements
+│   ├── auth/                # Authentication and authorization
+│   ├── common/              # Shared DTOs and utilities
+│   ├── database/            # Database connection configuration
+│   ├── quizzes/             # Quiz management functionality
+│   ├── users/               # User management
+│   ├── app.module.ts        # Main application module
+│   └── main.ts              # Application entry point
+```
+
+### Key Components
+
+#### Modules
+
+- **Auth Module**: Handles user authentication, JWT token generation, and route protection
+- **Users Module**: Manages user data and operations
+- **Quizzes Module**: Provides quiz creation, retrieval, and scoring functionality
+- **Announcements Module**: Manages system-wide and targeted announcements
+- **Database Module**: Configures MongoDB connection using Mongoose
+
+#### Data Models
+
+The application uses Mongoose schemas to define data models:
+
+- **User**: Stores student information, authentication details, and relationships to quizzes
+- **Quiz**: Contains quiz content, questions, answers, and scoring information
+- **Announcement**: Manages notifications and important updates for students
+
+## Why This Architecture Is Awesome
+
+### Modular Design
+
+The modular architecture makes the codebase highly maintainable and extensible. Each feature is encapsulated in its own module with clear responsibilities, making it easy to:
+
+- Add new features without affecting existing functionality
+- Test components in isolation
+- Understand the codebase quickly, even for new developers
+
+### Dependency Injection
+
+NestJS's powerful dependency injection system enables:
+
+- Loose coupling between components
+- Easier unit testing through mock dependencies
+- Clean separation of concerns
+
+### TypeScript Integration
+
+The project leverages TypeScript for:
+
+- Strong typing and compile-time error checking
+- Enhanced code documentation through interfaces and types
+- Better IDE support with autocompletion and refactoring tools
+
+### MongoDB with Mongoose
+
+The choice of MongoDB with Mongoose provides:
+
+- Flexible schema design that can evolve with application needs
+- Powerful querying capabilities
+- Simple document relationships that match the domain model
+
+### Docker Integration
+
+The project includes Docker and Docker Compose configuration for:
+
+- Consistent development environments
+- Easy deployment across different platforms
+- Simple management of dependent services (MongoDB, Mongo Express)
+
+## Code Harmony and Readability
+
+This project prioritizes code quality and readability through:
+
+- **Consistent Naming Conventions**: Clear, descriptive names for files, classes, and variables
+- **Clean Code Principles**: Small, focused functions and classes with single responsibilities
+- **Comprehensive DTOs**: Clear data transfer objects for API requests and responses
+- **Separation of Concerns**: Controllers handle HTTP requests, services contain business logic, and schemas define data models
+
+## Version Control Strategy
+
+For version control, this project uses GitHub Workflow as it's particularly effective for smaller projects:
+
+- **Feature Branches**: Development of new features in isolated branches
+- **Pull Requests**: Code review process before merging to main branch
+- **Continuous Integration**: Automated testing on pull requests
+- **Simple Workflow**: Less overhead compared to more complex Git workflows, making it ideal for small to medium-sized projects
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or later)
+- Docker and Docker Compose (for containerized development)
+- MongoDB (if running without Docker)
+
+### Installation
+
+1. Clone the repository
+
+```bash
+$ git clone https://github.com/Eihab4/student-dashboard-api.git
+$ cd student-dashboard-api
+```
+
+2. Install dependencies
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+3. Set up environment variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+PORT=3000
+MONGO_URI=mongodb://username:password@localhost:27017/student-dashboard
+MONGO_USER=username
+MONGO_PASS=password
+MONGO_DB=student-dashboard
+JWT_SECRET=your_jwt_secret
+```
+
+### Running the Application
+
+#### Using Docker
+
+```bash
+$ docker-compose up
+```
+
+This will start the NestJS application, MongoDB, and Mongo Express.
+
+#### Without Docker
 
 ```bash
 # development
@@ -43,57 +156,3 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# student-dashboard-api
