@@ -11,8 +11,8 @@ import {
 import { QuizzesService } from './quizzes.service';
 import { CreateQuizRequestDto } from './dto/requests/create-quiz.request.dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { CurrentUser } from 'src/auth/decorators/currentUser.decorator';
-import type JwtPayload from 'src/auth/interfaces/jwtPayload.interface';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import type JwtPayload from 'src/auth/interfaces/jwt-payload.interface';
 import { CreateQuizResponseDto } from './dto/responses/create-quiz.resonse.dto';
 import { FetchQuizResponseDto } from './dto/responses/fetch-quiz.response.dto';
 import { UpdateQuizRequestDto } from './dto/requests/update-quiz..request.dto';

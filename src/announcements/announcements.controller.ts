@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { AnnouncementsService } from './announcements.service';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { CurrentUser } from 'src/auth/decorators/currentUser.decorator';
-import type JwtPayload from 'src/auth/interfaces/jwtPayload.interface';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import type JwtPayload from 'src/auth/interfaces/jwt-payload.interface';
 import { CreateAnnouncementRequestDto } from './dtos/requests/create-announcement.request.dto';
 import { CreateAnnouncementResponseDto } from './dtos/responses/create-announcement.response.dto';
 import { FetchAnnouncementResponseDto } from './dtos/responses/fetch-announcement.response.dto';
